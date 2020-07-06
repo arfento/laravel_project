@@ -14,5 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
+});
+ 
+Route::get('/about', function () {
+    $nama = 'About Page'; //declarasi variabel
+    return view('about', ['nama' => $nama]); //pemanggilan variabel pada route
 });
