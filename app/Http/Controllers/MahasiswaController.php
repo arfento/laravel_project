@@ -1,10 +1,12 @@
 <?php
-
+// run in terminal php artisan config:cache apabila menjalankan di luar htdocs agar database terdeteksi
 
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
+use App\Student;  //pemanggilan model student
 
 class MahasiswaController extends Controller
 {
@@ -15,8 +17,12 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        $mahasiswa = DB::table('mahasiswa')->get();
-        dump($mahasiswa); //untuk melihat isi database
+        // $mahasiswa = DB::table('student')->get(); tidak digunakan setelah makai model
+
+        // $mahasiswa = \App\Student::all();
+        $mahasiswa = Student::all();
+
+        // dump($mahasiswa); //untuk melihat isi database
         // var_dump($mahasiswa); //untuk melihat isi database
         // dd($mahasiswa); //untuk melihat isi database
         return view('mahasiswa/index', ['mahasiswa' => $mahasiswa]);
