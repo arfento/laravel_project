@@ -13,11 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+// Route::get('/', function () {
+//     return view('home');
+// });
  
-Route::get('/about', function () {
-    $nama = 'About Page'; //declarasi variabel
-    return view('about', ['nama' => $nama]); //pemanggilan variabel pada route
-});
+// Route::get('/about', function () {
+//     $nama = 'About Page'; //declarasi variabel
+//     return view('about', ['nama' => $nama]); //pemanggilan variabel pada route
+// });
+
+Route::get('/', 'PagesController@home');
+Route::get('/about', 'PagesController@about');
+
+Route::get('/mahasiswa', 'MahasiswaController@index');
+
+
