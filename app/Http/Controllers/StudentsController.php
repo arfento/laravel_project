@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Student;
 use Illuminate\Http\Request;
+use PHPUnit\Framework\MockObject\Builder\Stub;
 
 class StudentsController extends Controller
 {
@@ -16,7 +17,7 @@ class StudentsController extends Controller
     {
         //
         $students = Student::all();
-        return view('students\index', compact('students'));
+        return view('students\index', compact('students'));  ///compact penganti pemanggilan variabe;
     }
 
     /**
@@ -26,7 +27,7 @@ class StudentsController extends Controller
      */
     public function create()
     {
-        //
+        return view('students/create');
     }
 
     /**
@@ -37,7 +38,33 @@ class StudentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //cara 1
+        /* $student = new Student;
+        $student ->nama = $request ->nama; // yg $student dari tabel dan $request didapat dari form
+        $student ->nrp = $request ->nrp;
+        $student ->email = $request ->email;
+        $student ->jurusan = $request ->jurusan;
+        
+        $student -> save(); */
+
+        //cara 2
+        // Student::create([
+        //     'nama' => $request->nama,
+        //     'nrp' => $request->nrp,
+        //     'email' => $request->email,
+        //     'jurusan' => $request->jurusan,
+
+        // ]);
+
+
+        $request ->validate([
+            'nama' => ['required'],
+            'nrp' => ['required','size:4'],
+        ]);
+
+        //cara 3 -> mengirim semua data yg telah dideclarasikan di fillable pada model
+        Student::create($request->all());
+        return redirect('/students')->with('status', 'data student berhasil ditambahkan');
     }
 
     /**
@@ -49,6 +76,7 @@ class StudentsController extends Controller
     public function show(Student $student)
     {
         //
+        return view('students.show', compact('student'));
     }
 
     /**
