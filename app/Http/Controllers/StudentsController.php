@@ -60,6 +60,8 @@ class StudentsController extends Controller
         $request ->validate([
             'nama' => ['required'],
             'nrp' => ['required','size:4'],
+            'email' => ['required'],
+            'jurusan' => ['required'],
         ]);
 
         //cara 3 -> mengirim semua data yg telah dideclarasikan di fillable pada model
